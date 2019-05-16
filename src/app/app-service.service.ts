@@ -9,7 +9,19 @@ export class AppServiceService {
 
   constructor(public db : AngularFirestore) { }
 
-getVehicleCounting() : Observable<any[]>{
-  return this.db.collection("vehicle-counting").doc("camera-x").collection("time").snapshotChanges();
+getVehicleCounting(kota: string,kamera :string,tanggal :string) : Observable<any[]>{
+  return this.db.collection("kota").doc(kota).collection("kamera").doc(kamera).collection("tanggal").doc(tanggal).collection("jam").snapshotChanges()
+}
+
+getKota() : Observable<any[]>{
+  return this.db.collection("kota").snapshotChanges()
+}
+
+getKamera(kota : string) : Observable<any[]>{
+  return this.db.collection("kota").doc(kota).collection("kamera").snapshotChanges();
+}
+
+getDetailKamera(kota: string,kamera : string){
+  return this.db.collection("kota").doc(kota).collection("kamera").doc(kamera)
 }
 }
