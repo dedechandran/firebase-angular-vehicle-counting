@@ -23,7 +23,8 @@ export class ChartCountingComponent implements OnInit {
 
   public lineChartOptions = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
+    fill: false
   };
 
   public lineChartLabels = [];
@@ -34,7 +35,7 @@ export class ChartCountingComponent implements OnInit {
     {data: [], label: 'Mobil'},
     {data: [], label: 'Motor'},
     {data: [], label: 'Bus'},
-    {data: [], label: 'Truk',       
+    {data: [], label: 'Truk',
     backgroundColor: 'green',
     borderColor: 'green',
     pointBackgroundColor: 'green',
@@ -47,7 +48,7 @@ export class ChartCountingComponent implements OnInit {
   selectedKamera = "kamera-x"
   today = new Date()
   jsToday = formatDate(this.today,'dd-MMMM-yyyy','en-US','+0530')
-  
+
   constructor(public service: AppServiceService) { }
 
   ngOnInit(){
@@ -55,7 +56,7 @@ export class ChartCountingComponent implements OnInit {
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Vehicle;
         const id = a.payload.doc.id;
-        return { id, ...data };        
+        return { id, ...data };
       }))
     )
     .subscribe(res => {
