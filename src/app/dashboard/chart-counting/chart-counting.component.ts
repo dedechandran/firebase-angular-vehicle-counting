@@ -24,7 +24,26 @@ export class ChartCountingComponent implements OnInit {
   public lineChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
-    fill: false
+    scales : {
+      yAxes : [{
+        ticks : {
+          beginAtZero : true,
+          stepSize: 1
+        },
+        scaleLabel:{
+          display:true,
+          labelString:'Jumlah'
+        }
+      }],
+      xAxes :[{
+        scaleLabel:{
+          type: 'time',
+          distribution: 'linear',
+          display:true,
+          labelString:'Waktu'
+        }
+      }]
+    }
   };
 
   public lineChartLabels = [];
@@ -32,16 +51,33 @@ export class ChartCountingComponent implements OnInit {
   public lineChartLegend = true;
 
   public lineChartData = [
-    {data: [], label: 'Mobil'},
-    {data: [], label: 'Motor'},
-    {data: [], label: 'Bus'},
+    {data: [], label: 'Mobil',
+    pointBackgroundColor: 'pink',
+    pointBorderColor: 'white',
+    pointHoverBackgroundColor: 'white',
+    pointHoverBorderColor: 'pink',
+    fill: false},
+    {data: [], label: 'Motor',    
+    borderColor: 'cyan',
+    pointBackgroundColor: 'cyan',
+    pointBorderColor: 'white',
+    pointHoverBackgroundColor: 'white',
+    pointHoverBorderColor: 'cyan',
+    fill: false},
+    {data: [], label: 'Bus',
+    borderColor: 'yellow',
+    pointBackgroundColor: 'yellow',
+    pointBorderColor: 'white',
+    pointHoverBackgroundColor: 'white',
+    pointHoverBorderColor: 'yellow',
+    fill: false},
     {data: [], label: 'Truk',
-    backgroundColor: 'green',
     borderColor: 'green',
     pointBackgroundColor: 'green',
     pointBorderColor: 'white',
     pointHoverBackgroundColor: 'white',
-    pointHoverBorderColor: 'green' }
+    pointHoverBorderColor: 'green',
+    fill: false }
   ];
 
   selectedKota = "kota-tokyo"
