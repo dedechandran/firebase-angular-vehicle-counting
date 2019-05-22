@@ -14,6 +14,7 @@ import { FormCountingComponent } from './dashboard/form-counting/form-counting.c
 import { ChartKepadatanComponent } from './dashboard/chart-kepadatan/chart-kepadatan.component';
 import { FormsModule } from '@angular/forms'
 import { JenisKendaraanComponent } from './dashboard/jenis-kendaraan/jenis-kendaraan.component';
+import { FormPickerComponent } from './dashboard/form-picker/form-picker.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { JenisKendaraanComponent } from './dashboard/jenis-kendaraan/jenis-kenda
     ChartCountingComponent,
     FormCountingComponent,
     ChartKepadatanComponent,
-    JenisKendaraanComponent
+    JenisKendaraanComponent,
+    FormPickerComponent
   ],
   imports: [
     BrowserModule,

@@ -8,39 +8,52 @@
       </div>
   </div>
 </div>
-    
 
 <div class="row" style="margin-bottom:16px;margin-top:16px;">
-      <div class="col">
-        <h6>Pilih Lokasi & Kamera</h6>
-        <div class="card">
-          <div class="card-body">
-              <div class="form-group">
-                  <label for="exampleFormControlSelect1">Pilih Kota</label>
-                  <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="selectedKota" >
-                      <option *ngFor="let kota of arrKota">
-                          {{kota.id}}
-                        </option>
-                  </select>
-              </div>
-              <div class="form-group">
-                  <label for="exampleFormControlSelect1">Pilih Kamera</label>
-                  <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="selectedKamera" >
-                      <option *ngFor="let kamera of arrKamera">
-                          {{kamera.id}}
-                        </option>
-                  </select>
-              </div>
+  <div class="col-12">
+    <h6>Pilih Lokasi & Kamera</h6>
+    <div class="card">
+      <div class="card-body row">
+        <div class="col-6">
+          <div class="form-group">
+              <label for="exampleFormControlSelect1">Pilih Kota</label>
+              <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="selectedKota" >
+                  <option *ngFor="let kota of arrKota">
+                      {{kota.id}}
+                    </option>
+              </select>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+              <label for="exampleFormControlSelect1">Pilih Kamera</label>
+              <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="selectedKamera" >
+                  <option *ngFor="let kamera of arrKamera">
+                      {{kamera.id}}
+                    </option>
+              </select>
           </div>
         </div>
       </div>
-      <div class="col">
-          <h6>Video Live Stream Kamera</h6>
-          <div class="card">
-            <div class="card-body">
-                <img src="http://110.5.60.225:8081/mjpg/video.mjpg" class="img-fluid" alt="Responsive image">
-            </div>
-          </div>
-      </div>
+    </div>
+  </div>
 </div>
-
+<div class="row" style="margin-bottom:16px;margin-top:16px;">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body row">
+        <div class="col-6">
+            <app-chart-counting></app-chart-counting>
+        </div>
+        <div class="col-6">
+            <h6>Video Live Stream Kamera</h6>
+            <div class="card">
+              <div class="card-body">
+                <img src="http://110.5.60.225:8081/mjpg/video.mjpg" class="img-fluid" alt="Responsive image">
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
