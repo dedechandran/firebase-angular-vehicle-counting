@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppServiceService } from 'src/app/app-service.service';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
+import * as moment from 'moment';
 
 export interface Vehicle {
   jumlahMobil: number;
@@ -9,6 +10,7 @@ export interface Vehicle {
   jumlahBus: number;
   jumlahTruk: number;
 }
+
 
 export interface VehicleId extends Vehicle { id: string; }
 
@@ -82,16 +84,26 @@ export class ChartCountingComponent implements OnInit {
 
   selectedKota = "kota-tokyo"
   selectedKamera = "kamera-x"
-  today = new Date()
-  jsToday = formatDate(this.today,'dd-MMMM-yyyy','en-US','+0530')
+  // jsToday = formatDate(this.today,'dd-MMMM-yyyy','en-US','+0530')
+  jsToday = "16-May-2019"
 
   constructor(public service: AppServiceService) { }
 
   ngOnInit(){
-    this.service.getVehicleCounting(this.selectedKota,this.selectedKamera,this.jsToday).pipe(
-      map(actions => actions.map(a => {
+    this.service.getVehicleCounting(this.selectedKota,this.selectedKamera,this.jsToday)
+    .pipe(
+      map(
+      actions => actions
+      .map(a => {
         const data = a.payload.doc.data() as Vehicle;
-        const id = a.payload.doc.id;
+         
+        // const id = moment(a.payload.doc.id).format('LTS').toString();
+        let id_time = new Date(a.payload.doc.id);
+        
+
+        const id = moment(a.payload.doc.id,"HH:mm:ss").format('HH:mm');
+        // const id = a.payload.doc.id;
+
         return { id, ...data };
       }))
     )
@@ -107,6 +119,7 @@ export class ChartCountingComponent implements OnInit {
     this.lineChartData[2].data = []
     this.lineChartData[3].data = []
     this.lineChartLabels = []
+    
     res.forEach(item => {
       this.lineChartLabels.push(item.id)
       this.lineChartData[0].data.push(item.mobil)
