@@ -125,27 +125,26 @@ export class ChartCountingComponent implements OnInit {
     this.lineChartData[2].data = []
     this.lineChartData[3].data = []
     this.lineChartLabels = []
-
+    
+    const updateAfter=3 //minute
     res.forEach(item => {
       let minute = moment(item.id,"HH:mm:ss").minute()
       let id = moment(item.id,"HH:mm:ss").format('LT')
-      if(!this.lineChartLabels.includes(id)){
-        if(minute%10!=0){
-          mobil+=item.mobil
-          motor+=item.motor
-          bus+=item.bus
-          truk+=item.truk
-        }else{
-          this.lineChartLabels.push(id)
-          this.lineChartData[0].data.push(mobil)
-          this.lineChartData[1].data.push(motor)
-          this.lineChartData[2].data.push(bus)
-          this.lineChartData[3].data.push(truk)
-          mobil=0
-          motor=0
-          bus=0
-          truk=0
-        }
+      if(minute%updateAfter!=0){
+        mobil+=item.mobil
+        motor+=item.motor
+        bus+=item.bus
+        truk+=item.truk
+      }else if(!this.lineChartLabels.includes(id)){
+        this.lineChartLabels.push(id)
+        this.lineChartData[0].data.push(mobil)
+        this.lineChartData[1].data.push(motor)
+        this.lineChartData[2].data.push(bus)
+        this.lineChartData[3].data.push(truk)
+        mobil=0
+        motor=0
+        bus=0
+        truk=0
       }
     })
   }
