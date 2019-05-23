@@ -12,6 +12,12 @@ export interface Vehicle {
 }
 
 
+let mobil=0
+let motor=0
+let bus=0
+let truk=0
+
+
 export interface VehicleId extends Vehicle { id: string; }
 
 @Component({
@@ -101,8 +107,8 @@ export class ChartCountingComponent implements OnInit {
         let id_time = new Date(a.payload.doc.id);
         
 
-        const id = moment(a.payload.doc.id,"HH:mm:ss").format('HH:mm');
-        // const id = a.payload.doc.id;
+        // const id = moment(a.payload.doc.id,"HH:mm:ss").format('HH:mm');
+        const id = a.payload.doc.id;
 
         return { id, ...data };
       }))
@@ -119,14 +125,29 @@ export class ChartCountingComponent implements OnInit {
     this.lineChartData[2].data = []
     this.lineChartData[3].data = []
     this.lineChartLabels = []
-    
+
     res.forEach(item => {
-      this.lineChartLabels.push(item.id)
-      this.lineChartData[0].data.push(item.mobil)
-      this.lineChartData[1].data.push(item.motor)
-      this.lineChartData[2].data.push(item.bus)
-      this.lineChartData[3].data.push(item.truk)
-     })
+      let minute = moment(item.id,"HH:mm:ss").minute()
+      let id = moment(item.id,"HH:mm:ss").format('LT')
+      if(!this.lineChartLabels.includes(id)){
+        if(minute%10!=0){
+          mobil+=item.mobil
+          motor+=item.motor
+          bus+=item.bus
+          truk+=item.truk
+        }else{
+          this.lineChartLabels.push(id)
+          this.lineChartData[0].data.push(mobil)
+          this.lineChartData[1].data.push(motor)
+          this.lineChartData[2].data.push(bus)
+          this.lineChartData[3].data.push(truk)
+          mobil=0
+          motor=0
+          bus=0
+          truk=0
+        }
+      }
+    })
   }
 
 }
